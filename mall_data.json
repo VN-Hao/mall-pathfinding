@@ -1,0 +1,77 @@
+{
+  "floors": [
+    {
+      "level": 1,
+      "shops": [
+        {"name": "KFC", "x": 10, "y": 20},
+        {"name": "McDonald's", "x": 50, "y": 60},
+        {"name": "Apple Store", "x": 100, "y": 20},
+        {"name": "Challenger", "x": 150, "y": 80}
+      ],
+      "connectors": ["Escalator1", "Stairs1", "Elevator1"],
+      "connections": [
+        {"from": "KFC", "to": "McDonald's"},
+        {"from": "KFC", "to": "Escalator1"},
+        {"from": "McDonald's", "to": "Apple Store"},
+        {"from": "Apple Store", "to": "Challenger"},
+        {"from": "Challenger", "to": "Elevator1"}
+      ]
+    },
+    {
+      "level": 2,
+      "shops": [
+        {"name": "Kinokuniya Book Store", "x": 20, "y": 30},
+        {"name": "POP MART Singapore", "x": 70, "y": 90},
+        {"name": "La Tendo", "x": 120, "y": 40}
+      ],
+      "connectors": ["Escalator1", "Stairs1", "Elevator1"],
+      "connections": [
+        {"from": "Kinokuniya Book Store", "to": "POP MART Singapore"},
+        {"from": "Kinokuniya Book Store", "to": "Escalator1"},
+        {"from": "POP MART Singapore", "to": "La Tendo"},
+        {"from": "La Tendo", "to": "Elevator1"}
+      ]
+    },
+    {
+      "level": 3,
+      "shops": [
+        {"name": "Haidilao", "x": 30, "y": 40},
+        {"name": "A Hot Hideout", "x": 90, "y": 120},
+        {"name": "Captain Kim BBQ", "x": 140, "y": 60}
+      ],
+      "connectors": ["Stairs1", "Elevator1"],
+      "connections": [
+        {"from": "Haidilao", "to": "A Hot Hideout"},
+        {"from": "Haidilao", "to": "Stairs1"},
+        {"from": "A Hot Hideout", "to": "Captain Kim BBQ"},
+        {"from": "Captain Kim BBQ", "to": "Elevator1"}
+      ]
+    }
+  ],
+  "connectors": [
+    {
+      "name": "Escalator1",
+      "type": "escalator",
+      "accessible": true,
+      "direction": "up",
+      "x": 60,
+      "y": 50
+    },
+    {
+      "name": "Stairs1",
+      "type": "stairs",
+      "accessible": false,
+      "direction": "both",
+      "x": 80,
+      "y": 70
+    },
+    {
+      "name": "Elevator1",
+      "type": "elevator",
+      "accessible": true,
+      "direction": "both",
+      "x": 100,
+      "y": 90
+    }
+  ]
+}
