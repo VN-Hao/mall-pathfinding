@@ -9,12 +9,34 @@
         {"name": "Challenger", "x": 150, "y": 80}
       ],
       "connectors": ["Escalator1", "Stairs1", "Elevator1"],
-      "connections": [
-        {"from": "KFC", "to": "McDonald's"},
-        {"from": "KFC", "to": "Escalator1"},
-        {"from": "McDonald's", "to": "Apple Store"},
-        {"from": "Apple Store", "to": "Challenger"},
-        {"from": "Challenger", "to": "Elevator1"}
+      "corridors": [
+        {
+          "id": "Corridor1",
+          "nodes": [
+            {"id": "C1N1", "x": 0, "y": 0},
+            {"id": "C1N2", "x": 50, "y": 0},
+            {"id": "C1N3", "x": 100, "y": 0},
+            {"id": "C1N4", "x": 150, "y": 0}
+          ],
+          "connections": [
+            {"from": "C1N1", "to": "C1N2"},
+            {"from": "C1N2", "to": "C1N3"},
+            {"from": "C1N3", "to": "C1N4"},
+            {"from": "C1N4", "to": "C2N1"}
+          ]
+        },
+        {
+          "id": "Corridor2",
+          "nodes": [
+            {"id": "C2N1", "x": 150, "y": 0},
+            {"id": "C2N2", "x": 150, "y": 50},
+            {"id": "C2N3", "x": 150, "y": 100}
+          ],
+          "connections": [
+            {"from": "C2N1", "to": "C2N2"},
+            {"from": "C2N2", "to": "C2N3"}
+          ]
+        }
       ]
     },
     {
@@ -25,11 +47,32 @@
         {"name": "La Tendo", "x": 120, "y": 40}
       ],
       "connectors": ["Escalator1", "Stairs1", "Elevator1"],
-      "connections": [
-        {"from": "Kinokuniya Book Store", "to": "POP MART Singapore"},
-        {"from": "Kinokuniya Book Store", "to": "Escalator1"},
-        {"from": "POP MART Singapore", "to": "La Tendo"},
-        {"from": "La Tendo", "to": "Elevator1"}
+      "corridors": [
+        {
+          "id": "Corridor3",
+          "nodes": [
+            {"id": "C3N1", "x": 0, "y": 0},
+            {"id": "C3N2", "x": 60, "y": 0},
+            {"id": "C3N3", "x": 120, "y": 0}
+          ],
+          "connections": [
+            {"from": "C3N1", "to": "C3N2"},
+            {"from": "C3N2", "to": "C3N3"},
+            {"from": "C3N3", "to": "C4N1"}
+          ]
+        },
+        {
+          "id": "Corridor4",
+          "nodes": [
+            {"id": "C4N1", "x": 120, "y": 0},
+            {"id": "C4N2", "x": 120, "y": 60},
+            {"id": "C4N3", "x": 120, "y": 120}
+          ],
+          "connections": [
+            {"from": "C4N1", "to": "C4N2"},
+            {"from": "C4N2", "to": "C4N3"}
+          ]
+        }
       ]
     },
     {
@@ -40,11 +83,32 @@
         {"name": "Captain Kim BBQ", "x": 140, "y": 60}
       ],
       "connectors": ["Stairs1", "Elevator1"],
-      "connections": [
-        {"from": "Haidilao", "to": "A Hot Hideout"},
-        {"from": "Haidilao", "to": "Stairs1"},
-        {"from": "A Hot Hideout", "to": "Captain Kim BBQ"},
-        {"from": "Captain Kim BBQ", "to": "Elevator1"}
+      "corridors": [
+        {
+          "id": "Corridor5",
+          "nodes": [
+            {"id": "C5N1", "x": 0, "y": 0},
+            {"id": "C5N2", "x": 70, "y": 0},
+            {"id": "C5N3", "x": 140, "y": 0}
+          ],
+          "connections": [
+            {"from": "C5N1", "to": "C5N2"},
+            {"from": "C5N2", "to": "C5N3"},
+            {"from": "C5N3", "to": "C6N1"}
+          ]
+        },
+        {
+          "id": "Corridor6",
+          "nodes": [
+            {"id": "C6N1", "x": 140, "y": 0},
+            {"id": "C6N2", "x": 140, "y": 70},
+            {"id": "C6N3", "x": 140, "y": 140}
+          ],
+          "connections": [
+            {"from": "C6N1", "to": "C6N2"},
+            {"from": "C6N2", "to": "C6N3"}
+          ]
+        }
       ]
     }
   ],
@@ -54,7 +118,7 @@
       "type": "escalator",
       "accessible": true,
       "direction": "up",
-      "x": 60,
+      "x": 150,
       "y": 50
     },
     {
@@ -62,7 +126,7 @@
       "type": "stairs",
       "accessible": false,
       "direction": "both",
-      "x": 80,
+      "x": 120,
       "y": 70
     },
     {
@@ -70,7 +134,7 @@
       "type": "elevator",
       "accessible": true,
       "direction": "both",
-      "x": 100,
+      "x": 140,
       "y": 90
     }
   ]

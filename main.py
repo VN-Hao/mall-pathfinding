@@ -1,6 +1,6 @@
 import argparse
 from data_loader import load_mall_from_json
-from pathfinding import find_shortest_path
+from pathfinding import find_shortest_path, generate_instructions
 from visualization import visualize_mall
 
 def main():
@@ -25,6 +25,10 @@ def main():
         print(f"Shortest path from {args.start_shop} to {args.end_shop}:")
         for step in path:
             print(" ->", step)
+        instructions = generate_instructions(mall, path)
+        print("\nTurn-by-turn Instructions:")
+        for instruction in instructions:
+            print(instruction)
         visualize_mall(mall, path)
     else:
         print(path)

@@ -1,6 +1,6 @@
 import json
 import difflib
-from models import Mall, Floor, Shop, Connector
+from models import Mall, Floor, Shop, Connector, Corridor, CorridorNode
 from typing import Dict
 
 def load_mall_from_json(file_path: str) -> Mall:
@@ -40,6 +40,42 @@ def load_mall_from_json(file_path: str) -> Mall:
                 connector.floors.append(floor)
                 floor.connectors[conn_name] = connector
 
+    # First, load all corridor nodes
+    for floor_data in data['floors']:
+        level = floor_data['level']
+        floor = floor_objects[level]
+        for corridor_data in floor_data.get('corridors', []):
+            for node_data in corridor_data['nodes']:
+                node = CorridorNode(
+                    id=node_data['id'],
+                    x=node_data['x'],
+                    y=node_data['y'],
+                    floor=floor
+                )
+                floor.corridor_nodes[node.id] = node
+
+    # Then, process corridors and their connections
+    for floor_data in data['floors']:
+        level = floor_data['level']
+        floor = floor_objects[level]
+        for corridor_data in floor_data.get('corridors', []):
+            corridor_nodes = [floor.corridor_nodes[node_data['id']] for node_data in corridor_data['nodes']]
+            corridor = Corridor(
+                id=corridor_data['id'],
+                floor=floor,
+                nodes=corridor_nodes
+            )
+            floor.corridors[corridor.id] = corridor
+            # Connect corridor nodes
+            for conn in corridor_data.get('connections', []):
+                from_node = floor.corridor_nodes.get(conn['from'])
+                to_node = floor.corridor_nodes.get(conn['to'])
+                if from_node and to_node:
+                    from_node.connections.append(to_node)
+                    to_node.connections.append(from_node)
+                else:
+                    print(f"Warning: Could not find nodes {conn['from']} or {conn['to']} on floor {floor.level}")
+
     # Create shops
     for floor_data in data['floors']:
         level = floor_data['level']
@@ -52,17 +88,6 @@ def load_mall_from_json(file_path: str) -> Mall:
                 y=shop_data.get('y', 0)
             )
             floor.shops[shop.name] = shop
-
-    # Create connections
-    for floor_data in data['floors']:
-        level = floor_data['level']
-        floor = floor_objects[level]
-        for conn in floor_data.get('connections', []):
-            from_entity = floor.shops.get(conn['from']) or floor.connectors.get(conn['from'])
-            to_entity = floor.shops.get(conn['to']) or floor.connectors.get(conn['to'])
-            if from_entity and to_entity:
-                add_connection(from_entity, to_entity, level)
-                add_connection(to_entity, from_entity, level)
 
     # Build the graph
     mall.build_graph()
